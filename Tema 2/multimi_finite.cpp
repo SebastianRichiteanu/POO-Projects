@@ -1,3 +1,4 @@
+// Richiteanu Mihai-Sebastian , Gr. 142
 #include <iostream>
 using namespace std;
 class Pereche {
@@ -35,10 +36,11 @@ public:
 
     friend istream& operator >> (istream&, Pereche&);
     friend ostream& operator << (ostream&,const Pereche&);
-    
+
 };
 istream& operator >> (istream& in, Pereche& per) {
     int aa, bb;
+    cout << "a,b: ";
     in >> aa >> bb;
     per.setter(aa, bb);
     return in;
@@ -102,10 +104,12 @@ public:
 };
 istream& operator >> (istream& in, Multime_pereche& m) {
     int nn;
+    cout << "n: ";
     in >> nn;
     m.setter_n(nn);
     Pereche pr;
     for (int i = 0; i < m.n; ++i) {
+        cout << "Pentru elementul de indice " << i << " : ";
         in >> pr;
         m.setter_pi(i, pr);
     }
@@ -155,21 +159,25 @@ public:
             p[i] = v[i];
     }
     Pereche pop() {
+        Pereche pr;
         if (n) {
-            Pereche pr;
             pr = p[n - 1];
             --n;
-            return pr;
         }
+        else
+            cout << "Stiva este goala!" << '\n';
+        return pr;
     }
 
 };
 istream& operator >> (istream& in, Stiva_pereche& m) {
     int nn;
+    cout << "n: ";
     in >> nn;
     m.setter_n(nn);
     Pereche pr;
     for (int i = 0; i < m.n; ++i) {
+        cout << "Pentru elementul de indice " << i << " : ";
         in >> pr;
         m.setter_pi(i, pr);
     }
@@ -219,8 +227,9 @@ public:
             p[i] = v[i];
     }
     Pereche pop() {
+        Pereche per;
         if (n) {
-            Pereche per = p[0];
+            per = p[0];
             Pereche* v;
             v = new Pereche[--n];
             for (int i = 1; i <= n; ++i)
@@ -228,16 +237,20 @@ public:
             p = new Pereche[n];
             for (int i = 0; i < n; ++i)
                 p[i] = v[i];
-            return per;
         }
+        else
+            cout << "Coada este goala!" << '\n';
+        return per;
     }
 };
 istream& operator >> (istream& in, Coada_pereche& m) {
     int nn;
+    cout << "n: ";
     in >> nn;
     m.setter_n(nn);
     Pereche pr;
     for (int i = 0; i < m.n; ++i) {
+        cout << "Pentru elementul de indice " << i << " : ";
         in >> pr;
         m.setter_pi(i, pr);
     }
@@ -249,7 +262,6 @@ ostream& operator << (ostream& out, Coada_pereche& m) {
         cout << m.p[i] << '\n';
     return out;
 }
-
 void go() {
     Coada_pereche c1, c2;
     Stiva_pereche st;
@@ -273,7 +285,7 @@ void go() {
     c2.push(p7);
     c2.push(p8);
     cout << "\nCoada 2: \n" << c2;
-     
+
     while (c1.get_n() && c2.get_n()) {
         Pereche pp1, pp2;
         pp1 = c1.pop();
@@ -288,13 +300,46 @@ void go() {
     for (int i = 0; i < aux; ++i)
         cout<<st.pop()<<'\n';
 }
-int main() 
+void go2() {
+    //Pereche
+    int nnn;
+    cin >> nnn;
+    Pereche *v_p;
+    v_p = new Pereche[nnn];
+    for (int i = 0; i < nnn; ++i)
+        cin >> v_p[i];
+    for (int i = 0; i < nnn; ++i)
+        cout << v_p[i] << '\n';
+    //Multime pereche
+    cin >> nnn;
+    Multime_pereche* v_m;
+    v_m = new Multime_pereche[nnn];
+    for (int i = 0; i < nnn; ++i)
+        cin >> v_m[i];
+    for (int i = 0; i < nnn; ++i)
+        cout << v_m[i] << '\n';
+    //Stiva pereche
+    cin >> nnn;
+    Stiva_pereche* v_s;
+    v_s = new Stiva_pereche[nnn];
+    for (int i = 0; i < nnn; ++i)
+        cin >> v_s[i];
+    for (int i = 0; i < nnn; ++i)
+        cout << v_s[i] << '\n';
+    //Coada pereche
+    cin >> nnn;
+    Coada_pereche* v_c;
+    v_c = new Coada_pereche[nnn];
+    for (int i = 0; i < nnn; ++i)
+        cin >> v_c[i];
+    for (int i = 0; i < nnn; ++i)
+        cout << v_c[i] << '\n';
+
+}
+int main()
 {
-    go();
+    //go();
+    //go2();
     return 0;
 }
 
-/*TO DO
-    pop sa returneze exceptie
-    push(pop());
-*/
